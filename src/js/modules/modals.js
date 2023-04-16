@@ -1,36 +1,33 @@
-'use strict';
-
 const modals = () => {
-    function bindModal(triggerSelector, modalSelector, closeSelector) {
+    let modalTimer;
 
-        const trigger = document.querySelectorAll(triggerSelector),
-            modal = document.querySelector(modalSelector),
-            close = document.querySelector(closeSelector);
+    const bindModal = (triggersSelector, modalSelector, closeSelector) => {
 
-        function closeModal() {
+        const triggers = document.querySelectorAll(triggersSelector);
+        const modal = document.querySelector(modalSelector);
+        const close = document.querySelector(closeSelector);
+
+        const closeModal = () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'visible';
         }
 
-        function showModal() {
+        const showModal = () => {
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
 
-        trigger.forEach((btn) => {
-            btn.addEventListener('click', (event) => {
+        triggers.forEach((trigger) => {
+            trigger.addEventListener('click', (event) => {
                 if (event.target) {
                     event.preventDefault();
                 }
-
                 showModal()
-                // clearTimeout(modalTimer); вот здесь мб как-то использовать, чтобы очистить таймер и он не показывал окно еще раз, но из функции значении не знаю как передать в таймер
+                clearTimeout(modalTimer);
             });
         });
 
-        close.addEventListener('click', () => {
-            closeModal();
-        });
+        close.addEventListener('click', () => closeModal());
 
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
@@ -43,16 +40,14 @@ const modals = () => {
                 closeModal();
             }
         });
-
     }
 
-    function showModalByTime(selector, time) {
-        setTimeout(() => {
+    const showModalByTime = (selector, time) => {
+        modalTimer = setTimeout(() => {
             document.querySelector(selector).style.display = 'block';
             document.body.style.overflow = 'hidden';
         }, time);
     }
-    // проблема в том, что таймер вызывает независимо от того, вызывали ли мы уже модальное окно, а если помещать таймер в функцию bindModal, то он дважды вызывается.
 
     showModalByTime('.popup', 3000)
 
