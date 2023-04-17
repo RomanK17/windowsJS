@@ -24,6 +24,7 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
     header.addEventListener('click', (event) => {
         const target = event.target;
         const isValidTabsTarget = target?.parentNode.classList.contains(tabsSelector.replace(/\./, '')) || target?.classList.contains(tabsSelector.replace(/\./, ''));
+
         if (isValidTabsTarget) {
             console.log(target);
             tabs.forEach((tab, tabNumber) => {
