@@ -18,15 +18,11 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
         tabs[itemNumber].classList.add(activeClass);
     };
 
-    hideTabContent();
-    showTabContent();
-
     header.addEventListener('click', (event) => {
         const target = event.target;
         const isValidTabsTarget = target?.parentNode.classList.contains(tabsSelector.replace(/\./, '')) || target?.classList.contains(tabsSelector.replace(/\./, ''));
 
         if (isValidTabsTarget) {
-            console.log(target);
             tabs.forEach((tab, tabNumber) => {
                 if (target == tab || target.parentNode == tab) {
                     hideTabContent();
@@ -35,6 +31,7 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
             });
         }
     });
+
 };
 
 export default creatingTabs;
