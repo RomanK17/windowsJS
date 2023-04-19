@@ -57,6 +57,9 @@ const modals = () => {
     //request for call back
     bindModal('.phone_link', '.popup', '.popup .popup_close');
 
+    //show calc form
+    bindModal('.popup_calc_btn', '.popup_calc', 'popup_calc_close');
+
 };
 
 export default modals;
