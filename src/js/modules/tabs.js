@@ -7,7 +7,6 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
         tabContent.forEach((content) => {
             content.style.display = 'none';
         });
-
         tabs.forEach((tab) => {
             tab.classList.remove(activeClass);
         });
@@ -18,7 +17,7 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
         tabs[itemNumber].classList.add(activeClass);
     };
 
-    header.addEventListener('click', (event) => {
+    const switchTabContent = (event) => {
         const target = event.target;
         const isValidTabsTarget = target?.parentNode.classList.contains(tabsSelector.replace(/\./, '')) || target?.classList.contains(tabsSelector.replace(/\./, ''));
 
@@ -29,6 +28,14 @@ const creatingTabs = ({ headerSelector, tabsSelector, contentSelector, activeCla
                     showTabContent(tabNumber);
                 }
             });
+        }
+    };
+
+    header.addEventListener('click', switchTabContent)
+
+    header.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            switchTabContent(event);
         }
     });
 
