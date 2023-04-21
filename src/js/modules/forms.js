@@ -1,13 +1,10 @@
-// нужно запустить сервер и проверить приходят ли запросы с сайта(скачать локальный сервер MAMP - нужно чтобы поддерживал post запросы) и добавить переменную в файл с путем к папке - 23.30 минута
-
 const createForms = () => {
     const forms = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
     const phoneInputs = document.querySelectorAll('[name="user_phone"]');
 
-    // можно добавить картинки загрузки вместо текста - посмотреть в папке \Users\roman\Documents\prog\windowsJS\src\assets\slick
     const messageForUser = {
-        loading: 'Загрузка...',
+        loading: 'Отправка данных...',
         success: 'Спасибо! С вами скоро свяжутся',
         error: 'Ошибка!'
     };
@@ -17,17 +14,18 @@ const createForms = () => {
             phoneInput.value = phoneInput.value.replace(/\D/, '');
         });
     });
-    // /\D/ - инвертирующий класс, все нецифры
 
     const postData = async (url, data) => {
         document.querySelector('.status').innerHTML = messageForUser.loading;
-        // fetch api возращает нам promise - посмотреть что это, поэтому мы прячем это все в переменную result 
+
         let result = await fetch(url, {
             method: 'POST',
-            body: data
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         return await result.text();
-        // это скорее всего возвращает нам в консоль переменную result 
     };
 
     const clearInputs = () => {
@@ -41,28 +39,21 @@ const createForms = () => {
             let messageDiv = document.createElement('div');
             messageDiv.classList.add('status');
             form.appendChild(messageDiv);
-            //получение данных через submit
-            //собираем данные для запроса на сервер
+
             const formData = new FormData(form);
-            // это формат FormData, есть еще формат JSON
-            //отправка запроса на сервер с fetch api 
-            // проверить правильный ли путь к беку
-            postData('assets/server.php', formData)
-                //здесь уже возвращается promise
+            let formDataObject = Object.fromEntries(formData.entries());
+
+            postData('https://simple-server-cumz.onrender.com/api/data', formDataObject)
                 .then(result => {
-                    //тут у нас уже результат функции postData в текстовом формате
                     console.log(result);
                     messageDiv.innerHTML = messageForUser.success;
                 })
                 .catch(() => messageDiv.innerHTML = messageForUser.error)
-                //это обработка ошибки - проверить работает ли
                 .finally(() => {
-                    //выполнится в любом случае
                     clearInputs();
                     setTimeout(() => {
-                        messageForUser.remove()
+                        messageDiv.remove()
                     }, 30000);
-                    //нам надо чтобы инпуты почистились в любом случае+ пропало сообщение юзеру
                 });
         });
     });
