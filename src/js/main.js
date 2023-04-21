@@ -18,4 +18,13 @@ window.addEventListener('DOMContentLoaded', () => {
             contentSelector: '.decoration_content > div > div',
             activeClass: 'after_click'
         });
+
+    //tabs in calc form
+    creatingTabs({
+        headerSelector: '.balcon_icons',
+        tabsSelector: '.balcon_icons_img',
+        contentSelector: '.big_img > img',
+        activeClass: 'do_image_more',
+        display: 'inline-block'
+    });
 });
