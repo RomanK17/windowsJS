@@ -4,7 +4,6 @@ import creatingTabs from './modules/tabs';
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
-
     creatingTabs(
         {
             headerSelector: '.glazing_slider',
@@ -19,13 +18,4 @@ window.addEventListener('DOMContentLoaded', () => {
             contentSelector: '.decoration_content > div > div',
             activeClass: 'after_click'
         });
-
-    //tabs in calc form
-    creatingTabs({
-        headerSelector: '.balcon_icons',
-        tabsSelector: '.balcon_icons_img',
-        contentSelector: '.big_img > img',
-        activeClass: '.do_image_more',
-        display: 'inline-block'
-    });
 });
