@@ -1,3 +1,5 @@
+import checkNumInputs from '../modules/checkNumInputs';
+
 const changeModalState = (state) => {
     const windowsTabs = document.querySelectorAll('.balcon_icons_img');
     const windowWidth = document.querySelector('#width');
@@ -12,6 +14,8 @@ const changeModalState = (state) => {
         });
     });
 
+    checkNumInputs('#width');
+    checkNumInputs('#height');
 
 
 };
