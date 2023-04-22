@@ -2,7 +2,7 @@ const modals = () => {
     let modalTimer;
 
     const bindModal = ({ triggersSelector, modalSelector, closeSelector, closeClickOverlay = true }) => {
-        console.log(closeClickOverlay);
+
         const triggers = document.querySelectorAll(triggersSelector);
         const modal = document.querySelector(modalSelector);
         const close = document.querySelector(closeSelector);
