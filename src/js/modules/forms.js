@@ -1,9 +1,8 @@
 import checkNumInputs from '../modules/checkNumInputs';
 
-const createForms = () => {
+const createForms = (state) => {
     const forms = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
-    const phoneInputs = document.querySelectorAll('[name="user_phone"]');
 
     const messageForUser = {
         loading: 'Отправка данных...',
@@ -11,6 +10,7 @@ const createForms = () => {
         error: 'Ошибка!'
     };
 
+    // only nmbrs in this input
     checkNumInputs('[name="user_phone"]');
 
     const postData = async (url, data) => {
@@ -39,6 +39,11 @@ const createForms = () => {
             form.appendChild(messageDiv);
 
             const formData = new FormData(form);
+            if (form.getAttribute('data-calc')) {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
             let formDataObject = Object.fromEntries(formData.entries());
 
             postData('https://simple-server-cumz.onrender.com/api/data', formDataObject)
