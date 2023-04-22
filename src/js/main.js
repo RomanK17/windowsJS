@@ -1,6 +1,7 @@
 import './slider';
 import modals from './modules/modals';
 import creatingTabs from './modules/tabs';
+import createForms from './modules/forms';
 import changeModalState from './modules/changeModalState';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -33,4 +34,6 @@ window.addEventListener('DOMContentLoaded', () => {
         activeClass: 'do_image_more',
         display: 'inline-block'
     });
+
+    createForms(modalState);
 });
