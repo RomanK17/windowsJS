@@ -7,4 +7,6 @@ const checkNumInputs = (selector) => {
         });
     });
 };
+
+//also add this funct to forms after merge
 export default checkNumInputs;
