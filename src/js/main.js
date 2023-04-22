@@ -1,9 +1,11 @@
 import './slider';
 import modals from './modules/modals';
 import creatingTabs from './modules/tabs';
+import createForms from './modules/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
     modals();
+    createForms();
     creatingTabs(
         {
             headerSelector: '.glazing_slider',
