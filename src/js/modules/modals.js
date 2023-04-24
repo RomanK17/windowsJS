@@ -1,12 +1,13 @@
 const modals = () => {
     let modalTimer;
 
-    const bindModal = ({ triggersSelector, modalSelector, closeSelector, closeClickOverlay = true }) => {
+    const bindModal = ({ triggersSelector, modalTrigger, modalSelector, closeSelector, closeClickOverlay = true }) => {
 
         const triggers = document.querySelectorAll(triggersSelector);
         const modal = document.querySelector(modalSelector);
         const close = document.querySelector(closeSelector);
         const allModals = document.querySelectorAll('[data-modal]');
+        const focusTrigger = document.querySelector(modalTrigger);
 
         const closeAllModals = () => {
             allModals.forEach((modalWindow) => {
@@ -16,12 +17,14 @@ const modals = () => {
 
         const closeModal = () => {
             modal.style.display = 'none';
-            document.body.style.overflow = 'visible';
             closeAllModals();
+            document.body.style.overflow = 'visible';
+            focusTrigger.focus();
         }
 
         const showModal = () => {
             modal.style.display = 'block';
+            close.focus();
             document.body.style.overflow = 'hidden';
         }
 
@@ -62,6 +65,7 @@ const modals = () => {
     //request engineer
     bindModal({
         triggersSelector: '.popup_engineer_btn',
+        modalTrigger: '.popup_engineer_btn',
         modalSelector: '.popup_engineer',
         closeSelector: '.popup_engineer .popup_close'
     });
@@ -69,6 +73,7 @@ const modals = () => {
     //request for call back
     bindModal({
         triggersSelector: '.phone_link',
+        modalTrigger: '.phone_link',
         modalSelector: '.popup',
         closeSelector: '.popup .popup_close'
     });
@@ -76,6 +81,7 @@ const modals = () => {
     //show calc form
     bindModal({
         triggersSelector: '.popup_calc_btn',
+        modalTrigger: '.popup_calc_btn',
         modalSelector: '.popup_calc',
         closeSelector: '.popup_calc_close',
         closeClickOverlay: false
@@ -84,6 +90,7 @@ const modals = () => {
     //show after calc form
     bindModal({
         triggersSelector: '.popup_calc_button',
+        modalTrigger: '.popup_calc_button',
         modalSelector: '.popup_calc_profile',
         closeSelector: '.popup_calc_profile_close',
         closeClickOverlay: false
@@ -92,6 +99,7 @@ const modals = () => {
     // show last calc form
     bindModal({
         triggersSelector: '.popup_calc_profile_button',
+        modalTrigger: '.popup_calc_profile_button',
         modalSelector: '.popup_calc_end ',
         closeSelector: '.popup_calc_end_close',
         closeClickOverlay: false
