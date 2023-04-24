@@ -2,10 +2,15 @@ import './slider';
 import modals from './modules/modals';
 import creatingTabs from './modules/tabs';
 import createForms from './modules/forms';
+import changeModalState from './modules/changeModalState';
 
 window.addEventListener('DOMContentLoaded', () => {
+    let modalState = {};
+
+    changeModalState(modalState);
+
     modals();
-    createForms();
+
     creatingTabs(
         {
             headerSelector: '.glazing_slider',
@@ -20,4 +25,15 @@ window.addEventListener('DOMContentLoaded', () => {
             contentSelector: '.decoration_content > div > div',
             activeClass: 'after_click'
         });
+
+    //tabs in calc form
+    creatingTabs({
+        headerSelector: '.balcon_icons',
+        tabsSelector: '.balcon_icons_img',
+        contentSelector: '.big_img > img',
+        activeClass: 'do_image_more',
+        display: 'inline-block'
+    });
+
+    createForms(modalState);
 });
