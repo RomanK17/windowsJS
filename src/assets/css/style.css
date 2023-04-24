@@ -1052,7 +1052,6 @@ textarea:focus {
   margin-bottom: 1rem;
 }
 
-input[type="radio"]:focus-visible,
 button:focus-visible {
   outline: 2px solid black;
 }
