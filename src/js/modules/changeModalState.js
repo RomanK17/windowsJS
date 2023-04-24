@@ -18,14 +18,6 @@ const changeModalState = (state) => {
                     case 'INPUT':
                         if (elem.type === 'checkbox') {
                             index === 0 ? state[property] = 'cold' : state[property] = 'warm';
-
-                            //only 1 checkbox can be checked
-                            elements.forEach((box, boxIndex) => {
-                                box.checked = false;
-                                if (index === boxIndex) {
-                                    box.checked = true;
-                                }
-                            });
                         } else {
                             state[property] = elem.value;
                         }
