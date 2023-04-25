@@ -1844,3 +1844,8 @@ button:focus-visible {
     animation: none !important;
   }
 }
+
+.bigImg {
+  max-width: 80%;
+  height: 80%;
+}

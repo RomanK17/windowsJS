@@ -10,6 +10,7 @@ const openImageModal = () => {
     modalImage.style.alignItems = 'center';
     modalImage.style.display = 'none';
     modalImage.appendChild(bigImage);
+    bigImage.classList.add('bigImg');
 
     imagesContainer.addEventListener('click', (event) => {
         event.preventDefault();
@@ -17,6 +18,7 @@ const openImageModal = () => {
 
         if (target && target.classList.contains('preview')) {
             modalImage.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
 
             const pathBigImg = target.parentNode.getAttribute('href');
             bigImage.setAttribute('src', pathBigImg);
@@ -25,6 +27,7 @@ const openImageModal = () => {
 
     const closeModalImage = () => {
         modalImage.style.display = 'none';
+        document.body.style.overflow = 'visible';
     };
 
     modalImage.addEventListener('click', closeModalImage);
