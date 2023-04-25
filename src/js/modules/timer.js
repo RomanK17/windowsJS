@@ -9,20 +9,16 @@ const createTimer = () => {
         const seconds = Math.floor((remainingTime / 1000) % 60);
 
         return {
-            'totalTime': remainingTime,
-            'days': days,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds
+            remainingTime,
+            days,
+            hours,
+            minutes,
+            seconds
         };
     };
 
-    function checkForZero(num) {
-        if (num >= 0 && num < 10) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
+    const checkForZero = (num) => {
+        return num >= 0 && num < 10 ? `0${num}` : num;
     }
 
     const setTimer = (endTime) => {
