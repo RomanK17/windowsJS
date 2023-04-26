@@ -1052,6 +1052,7 @@ textarea:focus {
   margin-bottom: 1rem;
 }
 
+a:focus-visible,
 button:focus-visible {
   outline: 2px solid black;
 }
@@ -1842,5 +1843,24 @@ button:focus-visible {
     /*css animations*/
     -webkit-animation: none !important;
     animation: none !important;
+  }
+}
+
+.bigImg {
+  max-width: 80%;
+  height: 80%;
+}
+
+.faded {
+  animation-name: faded;
+  animation-duration: 1.5s;
+}
+
+@keyframes faded {
+  from {
+    opacity: 30%;
+  }
+  to {
+    opacity: 100%;
   }
 }

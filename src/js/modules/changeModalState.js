@@ -29,7 +29,6 @@ const changeModalState = (state) => {
             });
         });
     };
-    console.log(state);
 
     bindActionToElems('click', windowsTabs, 'form');
     bindActionToElems('input', windowWidth, 'width');

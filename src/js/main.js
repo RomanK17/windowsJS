@@ -4,6 +4,7 @@ import creatingTabs from './modules/tabs';
 import createForms from './modules/forms';
 import changeModalState from './modules/changeModalState';
 import createTimer from './modules/timer';
+import openImageModal from './modules/images';
 
 window.addEventListener('DOMContentLoaded', () => {
     let modalState = {};
@@ -39,4 +40,6 @@ window.addEventListener('DOMContentLoaded', () => {
     createForms(modalState);
 
     createTimer();
+
+    openImageModal();
 });
