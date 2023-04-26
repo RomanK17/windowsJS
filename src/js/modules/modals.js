@@ -8,6 +8,7 @@ const modals = () => {
         const close = document.querySelector(closeSelector);
         const allModals = document.querySelectorAll('[data-modal]');
         const focusTrigger = document.querySelector(modalTrigger);
+        const scroll = calcScroll();
 
         const closeAllModals = () => {
             allModals.forEach((modalWindow) => {
@@ -20,12 +21,29 @@ const modals = () => {
             closeAllModals();
             document.body.style.overflow = 'visible';
             focusTrigger.focus();
+            document.body.style.marginRight = `0px`;
         }
 
         const showModal = () => {
             modal.style.display = 'block';
             close.focus();
             document.body.style.overflow = 'hidden';
+            document.body.style.marginRight = `${scroll}px`;
+        }
+
+        function calcScroll() {
+            let div = document.createElement('div');
+
+            div.style.width = '50px';
+            div.style.height = '50px';
+            div.style.overflowY = 'scroll';
+            div.style.visibility = 'hidden';
+
+            document.body.appendChild(div);
+            let scrollWidth = div.offsetWidth - div.clientWidth;
+            div.remove();
+
+            return scrollWidth;
         }
 
         triggers.forEach((trigger) => {
@@ -94,7 +112,7 @@ const modals = () => {
         modalSelector: '.popup_calc_profile',
         closeSelector: '.popup_calc_profile_close',
         closeClickOverlay: false
-    })
+    });
 
     // show last calc form
     bindModal({
@@ -103,7 +121,7 @@ const modals = () => {
         modalSelector: '.popup_calc_end ',
         closeSelector: '.popup_calc_end_close',
         closeClickOverlay: false
-    })
+    });
 
 };
 
