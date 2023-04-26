@@ -1850,3 +1850,17 @@ button:focus-visible {
   max-width: 80%;
   height: 80%;
 }
+
+.faded {
+  animation-name: faded;
+  animation-duration: 1.5s;
+}
+
+@keyframes faded {
+  from {
+    opacity: 30%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
