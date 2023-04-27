@@ -2,6 +2,7 @@ const openImageModal = () => {
     const imagesContainer = document.querySelector('.works');
     const modalImage = document.createElement('div');
     const bigImage = document.createElement('img');
+    const allBigImages = document.querySelectorAll('[data-image]');
 
     //creating modal for big image
     modalImage.classList.add('popup');
@@ -12,10 +13,9 @@ const openImageModal = () => {
     modalImage.appendChild(bigImage);
     bigImage.classList.add('bigImg');
 
-    const showModalImage = (pathBigImg) => {
+    const showModalImage = () => {
         modalImage.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        bigImage.setAttribute('src', pathBigImg);
     };
 
     const closeModalImage = () => {
@@ -29,14 +29,8 @@ const openImageModal = () => {
 
         if (target) {
             const pathBigImg = event.target.parentNode.getAttribute('href');
-            showModalImage(pathBigImg);
-        }
-    });
-
-    imagesContainer.addEventListener('keydown', (event) => {
-        if (event.code === 'Enter' && event.target.closest('.works')) {
-            const pathBigImg = event.target.getAttribute('href');
-            showModalImage(pathBigImg);
+            bigImage.setAttribute('src', pathBigImg);
+            showModalImage();
         }
     });
 
@@ -44,9 +38,44 @@ const openImageModal = () => {
         closeModalImage(event);
     });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.code === 'Escape') closeModalImage();
+    //for arrows
+    let counter = 0;
+    const getImageUrl = (counter) => {
+        const imageUrl = allBigImages[counter].getAttribute('href');
+        bigImage.setAttribute('src', imageUrl);
+    }
+
+    imagesContainer.addEventListener('keydown', (event) => {
+        switch (event.code) {
+            case 'Enter':
+                if (event.target.closest('.works')) {
+                    const pathBigImg = event.target.getAttribute('href');
+                    bigImage.setAttribute('src', pathBigImg);
+                    showModalImage();
+                }
+                break;
+
+            case 'Escape':
+                closeModalImage();
+                break;
+
+            case 'ArrowLeft':
+                counter--;
+                if (counter < 0) {
+                    counter = allBigImages.length - 1;
+                }
+                getImageUrl(counter);
+                break;
+            case 'ArrowRight':
+                counter++;
+                if (counter >= allBigImages.length) {
+                    counter = 0;
+                }
+                getImageUrl(counter);
+                break;
+        }
     });
+
 };
 
 export default openImageModal;
